@@ -1,0 +1,185 @@
+services:
+
+  # Router
+  mongo-router-1:
+    image: mongo:latest
+    container_name: mongo-router-1
+    command: mongos --configdb config-replica-set/mongo-config-srv-1:27017,mongo-config-srv-2:27017,mongo-config-srv-3:27017 --bind_ip_all --keyFile /etc/mongo-keyfile
+    ports:
+      - "27017:27017"
+    restart: always
+    volumes:
+      - ./data/sample_meflix:/mongo_import
+      - ./mongo-keyfile:/etc/mongo-keyfile
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: supersecret
+    depends_on:
+      - mongo-config-srv-1
+      - mongo-config-srv-2
+      - mongo-config-srv-3
+    networks:
+      - test
+
+  # Config Server
+  mongo-config-srv-1:
+    image: mongo:latest
+    container_name: mongo-config-srv-1
+    hostname: mongo-config-srv-1
+    volumes:
+      - ./mongo-keyfile:/etc/mongo-keyfile
+    command: ["--configsvr", "--replSet", "config-replica-set", "--bind_ip_all", "--port", "27017", "--auth", "--keyFile", "/etc/mongo-keyfile"]
+    networks:
+      - test
+
+  mongo-config-srv-2:
+    image: mongo:latest
+    container_name: mongo-config-srv-2
+    hostname: mongo-config-srv-2
+    volumes:
+      - ./mongo-keyfile:/etc/mongo-keyfile
+    command: ["--configsvr", "--replSet", "config-replica-set", "--bind_ip_all", "--port", "27017", "--auth", "--keyFile", "/etc/mongo-keyfile"]
+    networks:
+      - test
+
+  mongo-config-srv-3:
+    image: mongo:latest
+    container_name: mongo-config-srv-3
+    hostname: mongo-config-srv-3
+    volumes:
+      - ./mongo-keyfile:/etc/mongo-keyfile
+    command: ["--configsvr", "--replSet", "config-replica-set", "--bind_ip_all", "--port", "27017", "--auth", "--keyFile", "/etc/mongo-keyfile"]
+    networks:
+      - test
+
+# Shards
+  mongo-shard-1-rs-1:
+    container_name: mongo-shard-1-rs-1
+    hostname: mongo-shard-1-rs-1
+    image: mongo:latest
+    restart: always
+
+    command: ["--shardsvr", "--replSet", "shard-replica-set-1", "--bind_ip_all", "--port", "27017", "--auth", "--keyFile", "/etc/mongo-keyfile"]
+    volumes:
+      - ./data/sample_meflix:/mongo_import
+      - ./mongo-keyfile:/etc/mongo-keyfile
+    networks:
+      - test
+
+  mongo-shard-1-rs-2:
+    container_name: mongo-shard-1-rs-2
+    hostname: mongo-shard-1-rs-2
+    image: mongo:latest
+    restart: always
+    command: ["--shardsvr", "--replSet", "shard-replica-set-1", "--bind_ip_all", "--port", "27017", "--auth", "--keyFile", "/etc/mongo-keyfile"]
+    volumes:
+      - ./data/sample_meflix:/mongo_import
+      - ./mongo-keyfile:/etc/mongo-keyfile
+    networks:
+      - test
+
+  mongo-shard-1-rs-3:
+    container_name: mongo-shard-1-rs-3
+    hostname: mongo-shard-1-rs-3
+    image: mongo:latest
+    restart: always
+    command: ["--shardsvr", "--replSet", "shard-replica-set-1", "--bind_ip_all", "--port", "27017", "--auth", "--keyFile", "/etc/mongo-keyfile"]
+    volumes:
+      - ./data/sample_meflix:/mongo_import
+      - ./mongo-keyfile:/etc/mongo-keyfile
+    networks:
+      - test
+
+  mongo-shard-2-rs-1:
+    container_name: mongo-shard-2-rs-1
+    hostname: mongo-shard-2-rs-1
+    image: mongo:latest
+    restart: always
+    command: ["--shardsvr", "--replSet", "shard-replica-set-2", "--bind_ip_all", "--port", "27017", "--auth", "--keyFile", "/etc/mongo-keyfile"]
+    volumes:
+      - ./data/sample_meflix:/mongo_import
+      - ./mongo-keyfile:/etc/mongo-keyfile
+    networks:
+      - test
+
+  mongo-shard-2-rs-2:
+    container_name: mongo-shard-2-rs-2
+    hostname: mongo-shard-2-rs-2
+    image: mongo:latest
+    restart: always
+    command: ["--shardsvr", "--replSet", "shard-replica-set-2", "--bind_ip_all", "--port", "27017", "--auth", "--keyFile", "/etc/mongo-keyfile"]
+    volumes:
+      - ./data/sample_meflix:/mongo_import
+      - ./mongo-keyfile:/etc/mongo-keyfile
+    networks:
+      - test
+
+  mongo-shard-2-rs-3:
+    container_name: mongo-shard-2-rs-3
+    hostname: mongo-shard-2-rs-3
+    image: mongo:latest
+    restart: always
+    command: ["--shardsvr", "--replSet", "shard-replica-set-2", "--bind_ip_all", "--port", "27017", "--auth", "--keyFile", "/etc/mongo-keyfile"]
+    volumes:
+      - ./data/sample_meflix:/mongo_import
+      - ./mongo-keyfile:/etc/mongo-keyfile
+    networks:
+      - test
+
+  mongo-shard-3-rs-1:
+    container_name: mongo-shard-3-rs-1
+    hostname: mongo-shard-3-rs-1
+    image: mongo:latest
+    restart: always
+    command: ["--shardsvr", "--replSet", "shard-replica-set-3", "--bind_ip_all", "--port", "27017", "--auth", "--keyFile", "/etc/mongo-keyfile"]
+    volumes:
+      - ./data/sample_meflix:/mongo_import
+      - ./mongo-keyfile:/etc/mongo-keyfile
+    networks:
+      - test
+
+  mongo-shard-3-rs-2:
+    container_name: mongo-shard-3-rs-2
+    hostname: mongo-shard-3-rs-2
+    image: mongo:latest
+    restart: always
+    command: ["--shardsvr", "--replSet", "shard-replica-set-3", "--bind_ip_all", "--port", "27017", "--auth", "--keyFile", "/etc/mongo-keyfile"]
+    volumes:
+      - ./data/sample_meflix:/mongo_import
+      - ./mongo-keyfile:/etc/mongo-keyfile
+    networks:
+      - test
+
+  mongo-shard-3-rs-3:
+    container_name: mongo-shard-3-rs-3
+    hostname: mongo-shard-3-rs-3
+    image: mongo:latest
+    restart: always
+    command: ["--shardsvr", "--replSet", "shard-replica-set-3", "--bind_ip_all", "--port", "27017", "--auth", "--keyFile", "/etc/mongo-keyfile"]
+    volumes:
+      - ./data/sample_meflix:/mongo_import
+      - ./mongo-keyfile:/etc/mongo-keyfile
+    networks:
+      - test
+
+# UI
+  compass:
+    image: haohanyang/compass-web
+    container_name: mongo-compass
+    environment:
+      - CW_MONGO_URI=mongodb://mongo-router-1:27017
+    depends_on:
+      - mongo-router-1
+    ports:
+      - 8080:8080
+    links:
+      - mongo-router-1
+    networks:
+      - test
+
+networks:
+  test:
+    driver: bridge
+
+volumes:
+  mongodb_data:
