@@ -1,0 +1,38 @@
+services:
+  couchbase1:
+    image: couchbase:latest
+    container_name: couchbase1
+    hostname: couchbase1
+    domainname: demo.local
+    volumes:
+      - ./data/users.json:/users.json
+    ports:
+      - 8091-8096:8091-8096
+      - 11210:11210
+    networks:
+      network:
+        aliases:
+          - couchbase1.demo.local
+
+  couchbase2:
+    image: couchbase:latest
+    container_name: couchbase2
+    hostname: couchbase2
+    domainname: demo.local
+    networks:
+      network:
+        aliases:
+          - couchbase2.demo.local
+
+  couchbase3:
+    image: couchbase:latest
+    container_name: couchbase3
+    hostname: couchbase3
+    domainname: demo.local
+    networks:
+      network:
+        aliases:
+          - couchbase3.demo.local
+
+networks:
+  network:
