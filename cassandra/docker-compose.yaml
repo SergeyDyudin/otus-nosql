@@ -1,0 +1,84 @@
+services:
+  cassandra-1:
+    image: "cassandra:4.1"
+    container_name: "cassandra-1"
+    ports:
+      - 9042:9042
+    networks:
+      - cassandra-net
+    environment:
+      - CASSANDRA_CLUSTER_NAME=my-cluster
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - CASSANDRA_DC=my-datacenter-1
+      - CASSANDRA_SEEDS=cassandra-1,cassandra-2,cassandra-3
+    volumes:
+      - cassandra-node-1:/var/lib/cassandra:rw
+    restart:
+      on-failure
+    healthcheck:
+      test: ["CMD", "cqlsh", "-e", "describe keyspaces"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+      start_period: 30s
+
+  cassandra-2:
+    image: "cassandra:4.1"
+    container_name: "cassandra-2"
+    ports:
+      - 9043:9042
+    networks:
+      - cassandra-net
+    environment:
+      - CASSANDRA_CLUSTER_NAME=my-cluster
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - CASSANDRA_DC=my-datacenter-1
+      - CASSANDRA_SEEDS=cassandra-1,cassandra-2,cassandra-3
+    depends_on:
+      cassandra-1:
+        condition: service_healthy
+    volumes:
+      - cassandra-node-2:/var/lib/cassandra:rw
+    restart:
+      on-failure
+    healthcheck:
+      test: ["CMD", "cqlsh", "-e", "describe keyspaces"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+      start_period: 30s
+
+  cassandra-3:
+    image: "cassandra:4.1"
+    container_name: "cassandra-3"
+    ports:
+      - 9044:9042
+    networks:
+      - cassandra-net
+    environment:
+      - CASSANDRA_CLUSTER_NAME=my-cluster
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - CASSANDRA_DC=my-datacenter-1
+      - CASSANDRA_SEEDS=cassandra-1,cassandra-2,cassandra-3
+    depends_on:
+      cassandra-2:
+        condition: service_healthy
+    volumes:
+      - cassandra-node-3:/var/lib/cassandra:rw
+    restart:
+      on-failure
+    healthcheck:
+      test: ["CMD", "cqlsh", "-e", "describe keyspaces"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+      start_period: 30s
+
+networks:
+  cassandra-net:
+    driver: bridge
+
+volumes:
+  cassandra-node-1:
+  cassandra-node-2:
+  cassandra-node-3:
