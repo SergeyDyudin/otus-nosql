@@ -37,15 +37,56 @@ wheels = [
 ]
 
 [[package]]
+name = "boto3"
+version = "1.43.2"
+source = { registry = "https://nexus.zvq.me/repository/pypi-all/simple/" }
+dependencies = [
+    { name = "botocore" },
+    { name = "jmespath" },
+    { name = "s3transfer" },
+]
+sdist = { url = "https://nexus.zvq.me/repository/pypi-all/packages/boto3/1.43.2/boto3-1.43.2.tar.gz", hash = "sha256:be951cc22769fbcda73fac523b031ee38db45c3ae2b0d828c76b8f6e8e683073" }
+wheels = [
+    { url = "https://nexus.zvq.me/repository/pypi-all/packages/boto3/1.43.2/boto3-1.43.2-py3-none-any.whl", hash = "sha256:796e859cfb5e93c55276ce746f8020f691eda6b68a0ec4ce4f6fd07a1cca6859" },
+]
+
+[[package]]
+name = "botocore"
+version = "1.43.2"
+source = { registry = "https://nexus.zvq.me/repository/pypi-all/simple/" }
+dependencies = [
+    { name = "jmespath" },
+    { name = "python-dateutil" },
+    { name = "urllib3" },
+]
+sdist = { url = "https://nexus.zvq.me/repository/pypi-all/packages/botocore/1.43.2/botocore-1.43.2.tar.gz", hash = "sha256:7b2ec87b6d0720bff920451ce930e71c2a99cdea48d0eaa66ccf0b21ea747e03" }
+wheels = [
+    { url = "https://nexus.zvq.me/repository/pypi-all/packages/botocore/1.43.2/botocore-1.43.2-py3-none-any.whl", hash = "sha256:b823454d751a1c24bb403b5b07ab65007689654abb21787df923684e0743976c" },
+]
+
+[[package]]
+name = "jmespath"
+version = "1.1.0"
+source = { registry = "https://nexus.zvq.me/repository/pypi-all/simple/" }
+sdist = { url = "https://nexus.zvq.me/repository/pypi-all/packages/jmespath/1.1.0/jmespath-1.1.0.tar.gz", hash = "sha256:472c87d80f36026ae83c6ddd0f1d05d4e510134ed462851fd5f754c8c3cbb88d" }
+wheels = [
+    { url = "https://nexus.zvq.me/repository/pypi-all/packages/jmespath/1.1.0/jmespath-1.1.0-py3-none-any.whl", hash = "sha256:a5663118de4908c91729bea0acadca56526eb2698e83de10cd116ae0f4e97c64" },
+]
+
+[[package]]
 name = "otus-nosql"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "aiokafka" },
+    { name = "boto3" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "aiokafka", specifier = ">=0.13.0" }]
+requires-dist = [
+    { name = "aiokafka", specifier = ">=0.13.0" },
+    { name = "boto3", specifier = ">=1.43.2" },
+]
 
 [[package]]
 name = "packaging"
@@ -57,10 +98,52 @@ wheels = [
 ]
 
 [[package]]
+name = "python-dateutil"
+version = "2.9.0.post0"
+source = { registry = "https://nexus.zvq.me/repository/pypi-all/simple/" }
+dependencies = [
+    { name = "six" },
+]
+sdist = { url = "https://nexus.zvq.me/repository/pypi-all/packages/python-dateutil/2.9.0.post0/python-dateutil-2.9.0.post0.tar.gz", hash = "sha256:37dd54208da7e1cd875388217d5e00ebd4179249f90fb72437e91a35459a0ad3" }
+wheels = [
+    { url = "https://nexus.zvq.me/repository/pypi-all/packages/python-dateutil/2.9.0.post0/python_dateutil-2.9.0.post0-py2.py3-none-any.whl", hash = "sha256:a8b2bc7bffae282281c8140a97d3aa9c14da0b136dfe83f850eea9a5f7470427" },
+]
+
+[[package]]
+name = "s3transfer"
+version = "0.17.0"
+source = { registry = "https://nexus.zvq.me/repository/pypi-all/simple/" }
+dependencies = [
+    { name = "botocore" },
+]
+sdist = { url = "https://nexus.zvq.me/repository/pypi-all/packages/s3transfer/0.17.0/s3transfer-0.17.0.tar.gz", hash = "sha256:9edeb6d1c3c2f89d6050348548834ad8289610d886e5bf7b7207728bd43ce33a" }
+wheels = [
+    { url = "https://nexus.zvq.me/repository/pypi-all/packages/s3transfer/0.17.0/s3transfer-0.17.0-py3-none-any.whl", hash = "sha256:ce3801712acf4ad3e89fb9990df97b4972e93f4b3b0004d214be5bce12814c20" },
+]
+
+[[package]]
+name = "six"
+version = "1.17.0"
+source = { registry = "https://nexus.zvq.me/repository/pypi-all/simple/" }
+sdist = { url = "https://nexus.zvq.me/repository/pypi-all/packages/six/1.17.0/six-1.17.0.tar.gz", hash = "sha256:ff70335d468e7eb6ec65b95b99d3a2836546063f63acc5171de367e834932a81" }
+wheels = [
+    { url = "https://nexus.zvq.me/repository/pypi-all/packages/six/1.17.0/six-1.17.0-py2.py3-none-any.whl", hash = "sha256:4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274" },
+]
+
+[[package]]
 name = "typing-extensions"
 version = "4.15.0"
 source = { registry = "https://nexus.zvq.me/repository/pypi-all/simple/" }
 sdist = { url = "https://nexus.zvq.me/repository/pypi-all/packages/typing-extensions/4.15.0/typing_extensions-4.15.0.tar.gz", hash = "sha256:0cea48d173cc12fa28ecabc3b837ea3cf6f38c6d1136f85cbaaf598984861466" }
 wheels = [
     { url = "https://nexus.zvq.me/repository/pypi-all/packages/typing-extensions/4.15.0/typing_extensions-4.15.0-py3-none-any.whl", hash = "sha256:f0fa19c6845758ab08074a0cfa8b7aecb71c999ca73d62883bc25cc018c4e548" },
+]
+
+[[package]]
+name = "urllib3"
+version = "2.6.3"
+source = { registry = "https://nexus.zvq.me/repository/pypi-all/simple/" }
+sdist = { url = "https://nexus.zvq.me/repository/pypi-all/packages/urllib3/2.6.3/urllib3-2.6.3.tar.gz", hash = "sha256:1b62b6884944a57dbe321509ab94fd4d3b307075e0c2eae991ac71ee15ad38ed" }
+wheels = [
+    { url = "https://nexus.zvq.me/repository/pypi-all/packages/urllib3/2.6.3/urllib3-2.6.3-py3-none-any.whl", hash = "sha256:bf272323e553dfb2e87d9bfd225ca7b0f467b919d7bbd355436d3fd37cb0acd4" },
 ]
