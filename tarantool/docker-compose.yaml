@@ -1,0 +1,14 @@
+services:
+  tarantool:
+    container_name: tarantool
+    hostname: tarantool
+    image: tarantool/tarantool:latest
+    restart: always
+    ports:
+      - 3301:3301
+    networks:
+      - test
+
+networks:
+  test:
+    driver: bridge
