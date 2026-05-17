@@ -80,12 +80,14 @@ source = { virtual = "." }
 dependencies = [
     { name = "aiokafka" },
     { name = "boto3" },
+    { name = "pika" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "aiokafka", specifier = ">=0.13.0" },
     { name = "boto3", specifier = ">=1.43.2" },
+    { name = "pika", specifier = ">=1.4.0" },
 ]
 
 [[package]]
@@ -95,6 +97,15 @@ source = { registry = "https://nexus.zvq.me/repository/pypi-all/simple/" }
 sdist = { url = "https://nexus.zvq.me/repository/pypi-all/packages/packaging/26.1/packaging-26.1.tar.gz", hash = "sha256:f042152b681c4bfac5cae2742a55e103d27ab2ec0f3d88037136b6bfe7c9c5de" }
 wheels = [
     { url = "https://nexus.zvq.me/repository/pypi-all/packages/packaging/26.1/packaging-26.1-py3-none-any.whl", hash = "sha256:5d9c0669c6285e491e0ced2eee587eaf67b670d94a19e94e3984a481aba6802f" },
+]
+
+[[package]]
+name = "pika"
+version = "1.4.0"
+source = { registry = "https://nexus.zvq.me/repository/pypi-all/simple/" }
+sdist = { url = "https://nexus.zvq.me/repository/pypi-all/packages/pika/1.4.0/pika-1.4.0.tar.gz", hash = "sha256:84aa6d0cf60bbdb79d5780544a4a4e1799392760127bf9de2a03d3c3b92f5f1a" }
+wheels = [
+    { url = "https://nexus.zvq.me/repository/pypi-all/packages/pika/1.4.0/pika-1.4.0-py3-none-any.whl", hash = "sha256:937d8576f92a1ce3673d442161fefef614ac557583e10b9d84c14a6e228ed6a7" },
 ]
 
 [[package]]
