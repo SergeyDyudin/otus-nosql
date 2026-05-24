@@ -8,4 +8,6 @@ dependencies = [
     "aiokafka>=0.13.0",
     "boto3>=1.43.2",
     "pika>=1.4.0",
+    "qdrant-client>=1.15.0",
+    "fastembed>=0.6.0",
 ]
