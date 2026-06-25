@@ -10,4 +10,5 @@ dependencies = [
     "pika>=1.4.0",
     "qdrant-client>=1.15.0",
     "fastembed>=0.6.0",
+    "matplotlib>=3.8.0",
 ]

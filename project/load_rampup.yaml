@@ -1,0 +1,4 @@
+target: localhost:8123
+load_profile:
+  schedule: line(10, 80, 2m)
+output: results

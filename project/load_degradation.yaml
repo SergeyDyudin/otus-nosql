@@ -1,0 +1,4 @@
+target: localhost:8123
+load_profile:
+  schedule: const(25, 3m)
+output: results

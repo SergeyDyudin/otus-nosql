@@ -1,0 +1,11 @@
+phantom:
+  address: clickhouse-01:8123
+  load_profile:
+    load_type: rps
+    schedule: const(300, 4m)
+  uris:
+    - /?query=SELECT%20count()%2C%20avg(tip_amount)%2C%20avg(total_amount)%20FROM%20taxi.trips_distributed
+    - /?query=SELECT%20passenger_count%2C%20count()%2C%20round(avg(tip_amount)%2C%202)%2C%20round(avg(total_amount)%2C%202)%20FROM%20taxi.trips_distributed%20GROUP%20BY%20passenger_count%20ORDER%20BY%20passenger_count
+    - /?query=SELECT%20pickup_ntaname%2C%20count()%2C%20round(avg(total_amount)%2C%202)%20FROM%20taxi.trips_distributed%20WHERE%20pickup_ntaname%20!%3D%20''%20GROUP%20BY%20pickup_ntaname%20ORDER%20BY%20count()%20DESC%20LIMIT%2020
+telegraf:
+  enabled: false
